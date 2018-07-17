@@ -1,3 +1,10 @@
+//whats going on
+//
+//1. need to output 2 things at end
+//  a. do we make it a word scrambler?
+//  b. do we just add some garbage to it?
+//
+//2. need to disallow things with less than 3 letters
 #include <iostream>
 #include <cctype>
 #include <cstring>
@@ -25,13 +32,10 @@ void toUnderscore(char[]);
 int main(){
     //variables
     char keywords[KEYWORDS];
-    char option = ' ';
     
-    //main flow
+    //input
     welcome();
     inputKeywords(keywords);
-    cout << ">>> " << keywords;
-    selectOutput(keywords, option);
     return 0;
 }
 
@@ -41,8 +45,16 @@ void welcome(){
 }
 
 void inputKeywords(char keywords[]){
+    char option = ' ';
     cin.get(keywords, KEYWORDS, '\n');
     cin.ignore(100,'\n');
+    if(strlen(keywords) >= 3){
+        cout << "\n\n" << ">>> Your keyword[s] are" << keywords << '\n';
+        selectOutput(keywords, option);
+    }else{
+        cout << "\n\n" << ">>> Please enter more than two letters" << '\n'; 
+        inputKeywords(keywords);
+    }
 }
 //present user with menu and select string modification
 void selectOutput(char keywords[],char option){
