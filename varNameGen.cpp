@@ -1,10 +1,3 @@
-//whats going on
-//
-//1. need to output 2 things at end
-//  a. do we make it a word scrambler?
-//  b. do we just add some garbage to it?
-//
-//2. need to disallow things with less than 3 letters
 #include <iostream>
 #include <cctype>
 #include <cstring>
@@ -16,7 +9,6 @@ using namespace std;
 
 //consts
 const int KEYWORDS = 41;
-const int i = 0;
 
 //prototypes
 void welcome();
@@ -27,6 +19,7 @@ void toUppercase(char[]);
 void toLowercase(char[]);
 void toCamelCase(char[]);
 void toUnderscore(char[]);
+void outputter(char[]);
 
 //main
 int main(){
@@ -49,13 +42,14 @@ void inputKeywords(char keywords[]){
     cin.get(keywords, KEYWORDS, '\n');
     cin.ignore(100,'\n');
     if(strlen(keywords) >= 3){
-        cout << "\n\n" << ">>> Your keyword[s] are" << keywords << '\n';
+        cout << "\n\n" << ">>> Your keyword[s] are: " << keywords << '\n';
         selectOutput(keywords, option);
     }else{
         cout << "\n\n" << ">>> Please enter more than two letters" << '\n'; 
         inputKeywords(keywords);
     }
 }
+
 //present user with menu and select string modification
 void selectOutput(char keywords[],char option){
     cout << "\n\n" << ">>> Please select an output option:" << '\n';
@@ -72,28 +66,41 @@ void selectOutput(char keywords[],char option){
     if(option == 'L'){
         toLowercase(keywords);
         removeSpaces(keywords);
-        cout << "\n\n" << ">>> Your varible name: " << keywords << "<<<" << '\n';
+        outputter(keywords);
     }else if(option == 'C'){
         toCamelCase(keywords);
         removeSpaces(keywords);
         keywords[0] = toupper(keywords[0]);
-        cout << "\n\n" << ">>> Your varible name: " << keywords << "<<<" << '\n';
+        outputter(keywords);
     }else if(option == 'R'){
         toCamelCase(keywords);
         removeSpaces(keywords);
         keywords[0] = tolower(keywords[0]);
-        cout << "\n\n" << ">>> Your varible name: " << keywords << "<<<" << '\n';
+        outputter(keywords);
     }else if(option == 'S'){
         toUnderscore(keywords);
         toLowercase(keywords);
-        cout << "\n\n" << ">>> Your varible name: " << keywords << "<<<" << '\n';
+        outputter(keywords);
     }else if(option == 'U'){
         toUppercase(keywords);
-        cout << "\n\n" << ">>> Your varible name: " << keywords << "<<<" << '\n';
+        outputter(keywords);
     }else{
         //if the user doesn't pick anything this kicks you back to selection menu
         selectOutput(keywords, option); 
     }
+}
+void outputter(char keywords[]){
+    int len = strlen(keywords);
+    char theKeywords[KEYWORDS + 3];
+    theKeywords[0] = 't';
+    theKeywords[1] = 'h';
+    theKeywords[2] = 'e';
+
+    for(int i = 0; i < len; ++i){
+        theKeywords[i+3] = keywords[i];
+    } 
+
+    cout << "\n\n" << ">>> Your varible names: " << keywords << " or "<< theKeywords << "<<<" << '\n'; 
 }
 //remove spaces in toUpper, toLower, toCamel
 void removeSpaces(char keywords[]){ 
