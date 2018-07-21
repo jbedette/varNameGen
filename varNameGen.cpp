@@ -33,6 +33,7 @@ int main(){
     again();
     return 0;
 }
+
 void again(){
     char option = ' ';
     cout << '\n' << ">>> If you would like to go again, please enter [y]." << "\n\n";
@@ -48,7 +49,7 @@ void again(){
 
 void welcome(){
     cout << "\n\n" << ">>> Welcome to the variable name generator.";
-    cout << "\n\n" << ">>> Please enter the keyword(s) you would like to implement." << "\n\n";
+    cout << "\n\n" << ">>> Please enter the keyword(s) you would like to implement on this line: " << "\n\n";
 }
 
 void inputKeywords(char keywords[]){
@@ -95,6 +96,7 @@ void selectOutput(char keywords[],char option){
     }
     outputter(keywords);
 }
+//outputs the keywords after modification, also makes a new one with 'the' on the front
 void outputter(char keywords[]){
     int len = strlen(keywords);
     char theKeywords[KEYWORDS + 3];
@@ -106,7 +108,7 @@ void outputter(char keywords[]){
         theKeywords[i+3] = keywords[i];
     } 
 
-    cout << "\n\n" << ">>> Your varible names: " << keywords << " or "<< theKeywords << "<<<" << '\n'; 
+    cout << "\n\n" << ">>> Your varible names: " << keywords << " or "<< theKeywords << '\n'; 
 }
 //remove spaces in toUpper, toLower, toCamel
 void removeSpaces(char keywords[]){ 
