@@ -20,6 +20,7 @@ void toLowercase(char[]);
 void toCamelCase(char[]);
 void toUnderscore(char[]);
 void outputter(char[]);
+void again();
 
 //main
 int main(){
@@ -29,7 +30,20 @@ int main(){
     //input
     welcome();
     inputKeywords(keywords);
+    again();
     return 0;
+}
+void again(){
+    char option = ' ';
+    cout << '\n' << ">>> If you would like to go again, please enter [y]." << "\n\n";
+    cin >> option;
+    cin.ignore(100,'\n');
+    if(tolower(option) == 'y'){
+        cout << '\n' << ">>> Restarting..." << "\n\n";
+	main();
+    }else{
+        cout << '\n' << ">>> Goodbye" << "\n\n";
+    }
 }
 
 void welcome(){
@@ -66,28 +80,24 @@ void selectOutput(char keywords[],char option){
     if(option == 'L'){
         toLowercase(keywords);
         removeSpaces(keywords);
-        outputter(keywords);
     }else if(option == 'C'){
         toCamelCase(keywords);
         removeSpaces(keywords);
         keywords[0] = toupper(keywords[0]);
-        outputter(keywords);
     }else if(option == 'R'){
         toCamelCase(keywords);
         removeSpaces(keywords);
         keywords[0] = tolower(keywords[0]);
-        outputter(keywords);
     }else if(option == 'S'){
         toUnderscore(keywords);
         toLowercase(keywords);
-        outputter(keywords);
     }else if(option == 'U'){
         toUppercase(keywords);
-        outputter(keywords);
     }else{
         //if the user doesn't pick anything this kicks you back to selection menu
         selectOutput(keywords, option); 
     }
+    outputter(keywords);
 }
 void outputter(char keywords[]){
     int len = strlen(keywords);
