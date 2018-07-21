@@ -8,7 +8,7 @@ using namespace std;
 
 
 //consts
-const int KEYWORDS = 41;
+const int KEYWORDS = 100;
 
 //prototypes
 void welcome();
@@ -67,18 +67,15 @@ void inputKeywords(char keywords[]){
 //present user with menu and select string modification
 void selectOutput(char keywords[],char option){
     cout << "\n\n" << ">>> Please select an output option:" << '\n';
-    cout << ">>> [L]owercase" << '\n';
-    cout << ">>> [U]ppercase" << '\n';
+    cout << ">>> [L]owercase" << '\n' << ">>> [U]ppercase" << '\n';
     cout << ">>> [C]amelCase with the first letter capitalized" << '\n';
-    cout << ">>> [R]egular CamelCase" << '\n';
-    cout << ">>> [S]eparated by Underscores" << "\n\n";
+    cout << ">>> [R]egular CamelCase" << '\n' << ">>> [S]eparated by Underscores" << "\n\n";
 
     cin >> option;
     option = toupper(option);
     cin.ignore(100,'\n');
-
+    toLowercase(keywords);
     if(option == 'L'){
-        toLowercase(keywords);
         removeSpaces(keywords);
     }else if(option == 'C'){
         toCamelCase(keywords);
@@ -90,7 +87,6 @@ void selectOutput(char keywords[],char option){
         keywords[0] = tolower(keywords[0]);
     }else if(option == 'S'){
         toUnderscore(keywords);
-        toLowercase(keywords);
     }else if(option == 'U'){
         toUppercase(keywords);
     }else{
